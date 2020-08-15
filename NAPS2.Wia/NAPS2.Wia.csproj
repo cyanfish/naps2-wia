@@ -10,7 +10,7 @@
         <Copyright>Copyright 2018-2020 Ben Olden-Cooligan</Copyright>
         <LangVersion>8</LangVersion>
         <Authors>Ben Olden-Cooligan</Authors>
-        <Description>WIA 2.0/1.0 application library for .NET</Description>
+        <Description>Low-level WIA 2.0/1.0 application library for .NET</Description>
         <PackageProjectUrl>https://github.com/cyanfish/naps2-wia</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
