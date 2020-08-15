@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net40;netcoreapp2.0;netstandard2.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <RootNamespace>NAPS2.Wia</RootNamespace>
+
+        <Title>NAPS2.Wia</Title>
+        <Product>NAPS2.Wia</Product>
+        <Copyright>Copyright 2018-2020 Ben Olden-Cooligan</Copyright>
+        <LangVersion>8</LangVersion>
+        <Authors>Ben Olden-Cooligan</Authors>
+        <Description>WIA 2.0/1.0 application library for .NET</Description>
+        <PackageProjectUrl>https://github.com/cyanfish/naps2-wia</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="_win32\NAPS2.Wia.Native.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="_win64\NAPS2.Wia.Native.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
