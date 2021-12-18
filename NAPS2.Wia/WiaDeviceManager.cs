@@ -9,7 +9,7 @@ namespace NAPS2.Wia
         private const int SCANNER_DEVICE_TYPE = 1;
         private const int SELECT_DEVICE_NODEFAULT = 1;
 
-        public WiaDeviceManager() : base(WiaVersion.Default)
+        public WiaDeviceManager() : this(WiaVersion.Default)
         {
         }
 
