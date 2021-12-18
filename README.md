@@ -20,6 +20,10 @@ using var device = deviceManager.PromptForDevice(parentForm.Handle);
 // Select between Flatbed/Feeder
 using var item = device.FindSubItem("Feeder");
 
+// Scan all pages in the feeder at once
+item.SetProperty(WiaPropertyId.IPS_PAGES,
+                 WiaPropertyValue.ALL_PAGES);
+
 // Enable duplex scanning
 item.SetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT,
                  WiaPropertyValue.DUPLEX);
