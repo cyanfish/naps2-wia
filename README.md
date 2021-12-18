@@ -22,7 +22,7 @@ using var item = device.FindSubItem("Feeder");
 
 // Enable duplex scanning
 item.SetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT,
-                 WiaPropertyValue.DUPLEX | WiaPropertyValue.FRONT_FIRST);
+                 WiaPropertyValue.DUPLEX);
 
 // Set up the scan
 using var transfer = item.StartTransfer();
