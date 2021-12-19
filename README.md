@@ -1,5 +1,7 @@
 # NAPS2.Wia
 
+[![NuGet](https://img.shields.io/nuget/v/NAPS2.Wia)](https://www.nuget.org/packages/NAPS2.Wia/)
+
 NAPS2.Wia is a standalone component that acts as a low-level wrapper around [Windows Image Acquisition (WIA)](https://docs.microsoft.com/en-us/windows/win32/wia/-wia-startpage).
 
 Compared to the COM-based [wiaaut.dll](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/wiaaut/-wiaaut-startpage), you get:
