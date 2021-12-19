@@ -4,24 +4,26 @@
         <TargetFrameworks>net40;netcoreapp2.0;netstandard2.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <RootNamespace>NAPS2.Wia</RootNamespace>
-
         <Title>NAPS2.Wia</Title>
         <Product>NAPS2.Wia</Product>
+        
         <Version>1.0.1</Version>
+        <PackageVersion>1.0.1</PackageVersion>
+        
         <Copyright>Copyright 2018-2021 Ben Olden-Cooligan</Copyright>
         <LangVersion>8</LangVersion>
         <Authors>Ben Olden-Cooligan</Authors>
         <Description>Low-level WIA 2.0/1.0 application library for .NET</Description>
-
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>NAPS2.Wia</Title>
         <RepositoryUrl>https://github.com/cyanfish/naps2-wia</RepositoryUrl>
-        <PackageVersion>1.0.1</PackageVersion>
         <PackageProjectUrl>https://github.com/cyanfish/naps2-wia</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>naps2 wia wiaaut scan scanning scanner</PackageTags>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>public_signing_key.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>
