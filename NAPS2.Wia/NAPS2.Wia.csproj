@@ -7,6 +7,7 @@
 
         <Title>NAPS2.Wia</Title>
         <Product>NAPS2.Wia</Product>
+        <Version>1.0.1</Version>
         <Copyright>Copyright 2018-2021 Ben Olden-Cooligan</Copyright>
         <LangVersion>8</LangVersion>
         <Authors>Ben Olden-Cooligan</Authors>
@@ -15,10 +16,12 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>NAPS2.Wia</Title>
         <RepositoryUrl>https://github.com/cyanfish/naps2-wia</RepositoryUrl>
-        <PackageVersion>1.0.0</PackageVersion>
+        <PackageVersion>1.0.1</PackageVersion>
         <PackageProjectUrl>https://github.com/cyanfish/naps2-wia</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>naps2 wia wiaaut scan scanning scanner</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
@@ -35,6 +38,11 @@
         <PackageCopyToOutput>true</PackageCopyToOutput>
         <PackagePath>contentFiles/_win64</PackagePath>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>
