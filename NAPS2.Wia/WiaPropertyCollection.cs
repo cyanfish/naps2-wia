@@ -8,7 +8,7 @@ namespace NAPS2.Wia
     {
         private readonly Dictionary<int, WiaProperty> _propertyDict;
 
-        public WiaPropertyCollection(WiaVersion version, IntPtr propertyStorageHandle) : base(version, propertyStorageHandle)
+        protected internal WiaPropertyCollection(WiaVersion version, IntPtr propertyStorageHandle) : base(version, propertyStorageHandle)
         {
             _propertyDict = new Dictionary<int, WiaProperty>();
             WiaException.Check(NativeWiaMethods.EnumerateProperties(Handle,
