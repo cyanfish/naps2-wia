@@ -42,7 +42,7 @@ namespace NAPS2.Wia
             return new WiaDevice(Version, deviceHandle);
         }
 
-        public WiaDevice? PromptForDevice(IntPtr parentWindowHandle)
+        public WiaDevice? PromptForDevice(IntPtr parentWindowHandle = default)
         {
             var hr = Version == WiaVersion.Wia10
                 ? NativeWiaMethods.SelectDevice1(Handle, parentWindowHandle, SCANNER_DEVICE_TYPE, SELECT_DEVICE_NODEFAULT, out _, out var deviceHandle)
@@ -52,10 +52,10 @@ namespace NAPS2.Wia
                 return null;
             }
             WiaException.Check(hr);
-            return new WiaDevice(Version, deviceHandle); ;
+            return new WiaDevice(Version, deviceHandle);
         }
 
-        public string[]? PromptForImage(IntPtr parentWindowHandle, WiaDevice device, string? tempFolder = null)
+        public string[]? PromptForImage(WiaDevice device, IntPtr parentWindowHandle = default, string? tempFolder = null)
         {
             tempFolder ??= Path.GetTempPath();
             var fileName = Path.GetRandomFileName();

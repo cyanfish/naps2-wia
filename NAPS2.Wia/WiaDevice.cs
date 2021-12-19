@@ -8,7 +8,7 @@ namespace NAPS2.Wia
         {
         }
         
-        public WiaItem? PromptToConfigure(IntPtr parentWindowHandle)
+        public WiaItem? PromptToConfigure(IntPtr parentWindowHandle = default)
         {
             if (Version == WiaVersion.Wia20)
             {

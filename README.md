@@ -15,8 +15,7 @@ If you're looking for a higher-level and easier-to-use scanning interface, check
 using var deviceManager = new WiaDeviceManager();
 
 // Prompt the user to select a scanner
-// You can use IntPtr.Zero for no parent window
-using var device = deviceManager.PromptForDevice(parentForm.Handle);
+using var device = deviceManager.PromptForDevice();
 
 // Select either "Flatbed" or "Feeder"
 using var item = device.FindSubItem("Feeder");
