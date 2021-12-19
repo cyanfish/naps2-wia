@@ -7,20 +7,33 @@
 
         <Title>NAPS2.Wia</Title>
         <Product>NAPS2.Wia</Product>
-        <Copyright>Copyright 2018-2020 Ben Olden-Cooligan</Copyright>
+        <Copyright>Copyright 2018-2021 Ben Olden-Cooligan</Copyright>
         <LangVersion>8</LangVersion>
         <Authors>Ben Olden-Cooligan</Authors>
         <Description>Low-level WIA 2.0/1.0 application library for .NET</Description>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>NAPS2.Wia</Title>
+        <RepositoryUrl>https://github.com/cyanfish/naps2-wia</RepositoryUrl>
+        <PackageVersion>1.0.0</PackageVersion>
         <PackageProjectUrl>https://github.com/cyanfish/naps2-wia</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="_win32\NAPS2.Wia.Native.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Content Include="NAPS2.Wia.targets" PackagePath="build/NAPS2.Wia.targets" />
+      <None Include="_win32\NAPS2.Wia.Native.dll">
+        <Pack>true</Pack>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <PackageCopyToOutput>true</PackageCopyToOutput>
+        <PackagePath>contentFiles/_win32</PackagePath>
       </None>
-      <None Update="_win64\NAPS2.Wia.Native.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <None Include="_win64\NAPS2.Wia.Native.dll">
+        <Pack>true</Pack>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <PackageCopyToOutput>true</PackageCopyToOutput>
+        <PackagePath>contentFiles/_win64</PackagePath>
       </None>
     </ItemGroup>
 

@@ -1,0 +1,12 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <ItemGroup>
+        <Win32Folder Include="$(MSBuildThisFileDirectory)\..\contentFiles\_win32\*.dll" />
+        <Win64Folder Include="$(MSBuildThisFileDirectory)\..\contentFiles\_win64\*.dll" />
+    </ItemGroup>
+    <Target Name="CopyNativeDlls" BeforeTargets="Build">
+        <Copy SourceFiles="@(Win32Folder)" DestinationFolder="$(TargetDir)_win32\" />
+        <Copy SourceFiles="@(Win64Folder)" DestinationFolder="$(TargetDir)_win64\" />
+    </Target>
+
+</Project>
