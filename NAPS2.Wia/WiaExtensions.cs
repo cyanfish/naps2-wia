@@ -28,19 +28,19 @@ namespace NAPS2.Wia
 
         public static bool SupportsFeeder(this WiaDevice device)
         {
-            int capabilities = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
+            int capabilities = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
             return (capabilities & WiaPropertyValue.FEEDER) != 0;
         }
 
         public static bool SupportsDuplex(this WiaDevice device)
         {
-            int capabilities = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
+            int capabilities = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
             return (capabilities & WiaPropertyValue.DUPLEX) != 0;
         }
 
         public static bool FeederReady(this WiaDevice device)
         {
-            int status = (int)device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS].Value;
+            int status = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS].Value;
             return (status & WiaPropertyValue.FEED_READY) != 0;
         }
 
@@ -61,11 +61,20 @@ namespace NAPS2.Wia
                 if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.List))
                 {
                     int value2 = value;
-                    var choice = prop.Attributes.Values.OfType<int>().OrderBy(x => Math.Abs(x - value2)).Cast<int?>().FirstOrDefault();
+                    var choice = prop.Attributes.Values.OfType<int>().OrderBy(x => Math.Abs(x - value2)).Cast<int?>()
+                        .FirstOrDefault();
                     if (choice != null)
                     {
                         prop.Value = choice.Value;
                         value = choice.Value;
+                    }
+                }
+                else if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.Range))
+                {
+                    value = Math.Min(Math.Max(value, prop.Attributes.Min), prop.Attributes.Max);
+                    if (prop.Attributes.Step != 0)
+                    {
+                        value -= (value - prop.Attributes.Min) % prop.Attributes.Step;
                     }
                 }
                 else
@@ -76,7 +85,8 @@ namespace NAPS2.Wia
             }
         }
 
-        public static void SetPropertyRange(this WiaItemBase item, int propId, int value, int expectedMin, int expectedMax)
+        public static void SetPropertyRange(this WiaItemBase item, int propId, int value, int expectedMin,
+            int expectedMax)
         {
             var prop = item.Properties.GetOrNull(propId);
             if (prop != null)
@@ -89,7 +99,7 @@ namespace NAPS2.Wia
                     int actualValue = expectedAbs * actualRange / expectedRange + prop.Attributes.Min;
                     if (prop.Attributes.Step != 0)
                     {
-                        actualValue -= actualValue % prop.Attributes.Step;
+                        actualValue -= (actualValue - prop.Attributes.Min) % prop.Attributes.Step;
                     }
 
                     actualValue = Math.Min(actualValue, prop.Attributes.Max);
