@@ -12,7 +12,7 @@
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
 
         <Copyright>Copyright 2018-2021 Ben Olden-Cooligan</Copyright>
-        <LangVersion>8</LangVersion>
+        <LangVersion>10</LangVersion>
         <Authors>Ben Olden-Cooligan</Authors>
         <Description>Low-level WIA 2.0/1.0 application library for .NET</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
