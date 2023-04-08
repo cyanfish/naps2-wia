@@ -5,7 +5,7 @@ public class WiaDevice : WiaItemBase, IWiaDeviceProps
     protected internal WiaDevice(WiaVersion version, IntPtr handle) : base(version, handle)
     {
     }
-        
+
     public WiaItem? PromptToConfigure(IntPtr parentWindowHandle = default)
     {
         if (Version == WiaVersion.Wia20)
@@ -13,9 +13,7 @@ public class WiaDevice : WiaItemBase, IWiaDeviceProps
             throw new InvalidOperationException("WIA 2.0 does not support PromptToConfigure. Use WiaDeviceManager.PromptForImage if you want to use the native WIA 2.0 UI.");
         }
 
-        int itemCount = 0;
-        IntPtr[]? items = null;
-        var hr = NativeWiaMethods.ConfigureDevice1(Handle, parentWindowHandle, 0, 0, ref itemCount, ref items);
+        var hr = NativeWiaMethods.ConfigureDevice1(Handle, parentWindowHandle, 0, 0, out int itemCount, out IntPtr[]? items);
         if (hr == 1)
         {
             return null;

@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Wia", "NAPS2.Wia\NAPS2.Wia.csproj", "{34600630-C4E7-4BBA-B658-C5CDAADE1EBA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NAPS2.Wia.Native", "NAPS2.Wia.Native\NAPS2.Wia.Native.vcxproj", "{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,11 +16,5 @@ Global
 		{34600630-C4E7-4BBA-B658-C5CDAADE1EBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34600630-C4E7-4BBA-B658-C5CDAADE1EBA}.Debug64|Any CPU.ActiveCfg = Debug|Any CPU
 		{34600630-C4E7-4BBA-B658-C5CDAADE1EBA}.Release64|Any CPU.ActiveCfg = Release|Any CPU
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug|Any CPU.Build.0 = Debug|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Release|Any CPU.ActiveCfg = Release|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Release|Any CPU.Build.0 = Release|Win32
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Debug64|Any CPU.ActiveCfg = Debug|x64
-		{BB7D50B9-C3C2-46A9-AFBC-C15097413FCF}.Release64|Any CPU.ActiveCfg = Release|x64
 	EndGlobalSection
 EndGlobal

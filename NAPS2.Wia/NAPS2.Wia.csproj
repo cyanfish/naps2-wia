@@ -4,6 +4,7 @@
         <TargetFrameworks>net462;net6;netstandard2.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>NAPS2.Wia</RootNamespace>
         <Title>NAPS2.Wia</Title>
         <Product>NAPS2.Wia</Product>
@@ -29,23 +30,8 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <Using Include="NAPS2.Wia.Native" />
         <Using Remove="System.Net.Http" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="NAPS2.Wia.targets" PackagePath="build/NAPS2.Wia.targets" />
-        <None Include="_win32\NAPS2.Wia.Native.dll">
-            <Pack>true</Pack>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-            <PackagePath>contentFiles/_win32</PackagePath>
-        </None>
-        <None Include="_win64\NAPS2.Wia.Native.dll">
-            <Pack>true</Pack>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-            <PackagePath>contentFiles/_win64</PackagePath>
-        </None>
     </ItemGroup>
 
     <ItemGroup>

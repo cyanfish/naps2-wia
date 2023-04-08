@@ -14,8 +14,7 @@ public class WiaItemBase : NativeWiaObject
         {
             if (_properties == null)
             {
-                WiaException.Check(NativeWiaMethods.GetItemPropertyStorage(Handle, out var propStorage));
-                _properties = new WiaPropertyCollection(Version, propStorage);
+                _properties = new WiaPropertyCollection(Version, Handle);
             }
             return _properties;
         }
@@ -30,7 +29,7 @@ public class WiaItemBase : NativeWiaObject
         return items;
     }
 
-    public WiaItem FindSubItem(string name)
+    public WiaItem? FindSubItem(string name)
     {
         return GetSubItems().FirstOrDefault(x => x.Name() == name);
     }

@@ -39,7 +39,7 @@ public class WiaTransfer : NativeWiaObject
         _cancel = true;
     }
 
-    private bool TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream stream)
+    private bool TransferStatusCallback(int msgType, int percent, ulong bytesTransferred, uint hresult, IStream? stream)
     {
         switch (msgType)
         {
@@ -47,7 +47,7 @@ public class WiaTransfer : NativeWiaObject
                 Progress?.Invoke(this, new ProgressEventArgs(percent));
                 break;
             case MSG_END_STREAM:
-                var wrappedStream = new NativeStreamWrapper(stream);
+                var wrappedStream = new NativeStreamWrapper(stream!);
                 if (_cancel)
                 {
                     wrappedStream.Dispose();

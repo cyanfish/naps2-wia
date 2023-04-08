@@ -4,22 +4,22 @@ public static class WiaExtensions
 {
     public static string Id(this IWiaDeviceProps device)
     {
-        return device.Properties[WiaPropertyId.DIP_DEV_ID].Value.ToString();
+        return device.Properties[WiaPropertyId.DIP_DEV_ID].Value.ToString()!;
     }
 
     public static string Name(this IWiaDeviceProps device)
     {
-        return device.Properties[WiaPropertyId.DIP_DEV_NAME].Value.ToString();
+        return device.Properties[WiaPropertyId.DIP_DEV_NAME].Value.ToString()!;
     }
 
     public static string Name(this WiaItem item)
     {
-        return item.Properties[WiaPropertyId.IPA_ITEM_NAME].Value.ToString();
+        return item.Properties[WiaPropertyId.IPA_ITEM_NAME].Value.ToString()!;
     }
 
     public static string FullName(this WiaItem item)
     {
-        return item.Properties[WiaPropertyId.IPA_FULL_ITEM_NAME].Value.ToString();
+        return item.Properties[WiaPropertyId.IPA_FULL_ITEM_NAME].Value.ToString()!;
     }
 
     public static bool SupportsFeeder(this WiaDevice device)
@@ -57,7 +57,7 @@ public static class WiaExtensions
             if (prop.Attributes.Flags.HasFlag(WiaPropertyFlags.List))
             {
                 int value2 = value;
-                var choice = prop.Attributes.Values.OfType<int>().OrderBy(x => Math.Abs(x - value2)).Cast<int?>()
+                var choice = prop.Attributes.Values!.OfType<int>().OrderBy(x => Math.Abs(x - value2)).Cast<int?>()
                     .FirstOrDefault();
                 if (choice != null)
                 {
