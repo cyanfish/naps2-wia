@@ -1,7 +1,7 @@
 ﻿namespace NAPS2.Wia;
 
 #if NET6_0_OR_GREATER
-[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 #endif
 public class WiaDeviceInfo : NativeWiaObject, IWiaDeviceProps
 {

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.ComTypes;
 namespace NAPS2.Wia.Native;
 
 #if NET6_0_OR_GREATER
-[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 #endif
 internal class WiaTransferCallback2 : IWiaTransferCallback
 {
