@@ -49,9 +49,8 @@ transfer.Download();
 - Native acquisition with WIA 1.0 only works in 32-bit processes. NAPS2.Sdk provides a 32-bit worker process that can be used from 64-bit applications. Most users shouldn't be affected since WIA 2.0 has no such issue.
 
 ## Supported Platforms
-- .NET Framework 4.0 (Windows XP+)
-- .NET Core 2.0+ (Windows)
-- .NET Standard 2.0+ (Windows)
+- .NET Framework 4.6.2+ (Windows)
+- .NET 6.0+ (Windows)
 
 ## License
 Unlike most of NAPS2.Sdk which is licensed under the LGPL, NAPS2.Wia uses the more permissive MIT license. 
