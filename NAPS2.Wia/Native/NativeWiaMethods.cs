@@ -2,6 +2,9 @@
 
 namespace NAPS2.Wia.Native;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 internal static class NativeWiaMethods
 {
     private static IntPtr ToPtr(object? comObject)

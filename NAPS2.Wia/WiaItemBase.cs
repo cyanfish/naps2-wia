@@ -1,5 +1,8 @@
 ﻿namespace NAPS2.Wia;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 public class WiaItemBase : NativeWiaObject
 {
     private WiaPropertyCollection? _properties;

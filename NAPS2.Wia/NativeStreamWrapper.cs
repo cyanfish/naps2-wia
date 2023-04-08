@@ -3,6 +3,9 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace NAPS2.Wia;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 internal class NativeStreamWrapper : Stream
 {
     private readonly IStream _source;

@@ -3,6 +3,9 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace NAPS2.Wia.Native;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 internal class WiaTransferCallback1 : IWiaDataCallback
 {
     private const int IT_MSG_DATA_HEADER = 0x0001;

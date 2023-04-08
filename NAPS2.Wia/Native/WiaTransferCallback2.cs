@@ -3,6 +3,9 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace NAPS2.Wia.Native;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
 internal class WiaTransferCallback2 : IWiaTransferCallback
 {
     private const int WIA_TRANSFER_MSG_STATUS = 0x00001;
