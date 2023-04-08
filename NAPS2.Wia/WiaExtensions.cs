@@ -76,6 +76,7 @@ namespace NAPS2.Wia
                     {
                         value -= (value - prop.Attributes.Min) % prop.Attributes.Step;
                     }
+                    prop.Value = value;
                 }
                 else
                 {
