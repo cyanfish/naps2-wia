@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using EventArgs = System.EventArgs;
+﻿using System.Runtime.InteropServices.ComTypes;
 
 namespace NAPS2.Wia;
 
