@@ -25,6 +25,12 @@ public static class WiaExtensions
         return item.Properties[WiaPropertyId.IPA_FULL_ITEM_NAME].Value.ToString()!;
     }
 
+    public static bool SupportsFlatbed(this WiaDevice device)
+    {
+        int capabilities = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
+        return (capabilities & WiaPropertyValue.FLATBED) != 0;
+    }
+
     public static bool SupportsFeeder(this WiaDevice device)
     {
         int capabilities = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
