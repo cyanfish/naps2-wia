@@ -22,6 +22,13 @@ internal interface IEnumSTATPROPSTG
     IEnumSTATPROPSTG Clone();
 }
 
+[ComImport, Guid("0000000c-0000-0000-C000-000000000046")]
+[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+internal interface IStreamPointerRead
+{
+    unsafe void Read(byte* pv, int cb, IntPtr pcbRead);
+}
+
 [ComImport, Guid("98B5E8A0-29CC-491a-AAC0-E6DB4FDCCEB6")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 internal interface IWiaPropertyStorage

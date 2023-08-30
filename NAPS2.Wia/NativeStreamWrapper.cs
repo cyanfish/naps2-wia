@@ -9,6 +9,7 @@ namespace NAPS2.Wia;
 internal class NativeStreamWrapper : Stream
 {
     private readonly IStream _source;
+    private readonly IStreamPointerRead _sourceReader;
     private readonly IntPtr _nativeLong;
 
     private long _position;
@@ -16,6 +17,8 @@ internal class NativeStreamWrapper : Stream
     public NativeStreamWrapper(IStream source)
     {
         _source = source;
+        // ReSharper disable once SuspiciousTypeConversion.Global
+        _sourceReader = (IStreamPointerRead) _source;
         _nativeLong = Marshal.AllocCoTaskMem(8);
     }
 
@@ -50,10 +53,16 @@ internal class NativeStreamWrapper : Stream
         set => Seek(value, SeekOrigin.Begin);
     }
 
-    public override int Read(byte[] buffer, int offset, int count)
+    public override unsafe int Read(byte[] buffer, int offset, int count)
     {
-        if (offset != 0) throw new NotImplementedException();
-        _source.Read(buffer, count, _nativeLong);
+        if (buffer.Length < offset + count)
+        {
+            throw new ArgumentException("Buffer too small");
+        }
+        fixed (byte* ptr = buffer)
+        {
+            _sourceReader.Read(ptr + offset, count, _nativeLong);
+        }
         int bytesRead = Marshal.ReadInt32(_nativeLong);
         _position += bytesRead;
         return bytesRead;
