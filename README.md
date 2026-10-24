@@ -48,6 +48,32 @@ transfer.Download();
 ## Known issues
 - Native acquisition with WIA 1.0 only works in 32-bit processes. NAPS2.Sdk provides a 32-bit worker process that can be used from 64-bit applications. Most users shouldn't be affected since WIA 2.0 has no such issue.
 
+## Transfer compatibility
+
+WIA 1.0 banded transfers first request `WiaImgFmt_MEMORYBMP` with `TYMED_CALLBACK`.
+If the driver rejects this setup, the library retries the previous
+`WiaImgFmt_BMP` with `TYMED_CALLBACK` configuration before starting the transfer.
+This retains the earlier behavior for drivers that reject MemoryBMP while
+allowing legacy drivers such as the Canon CanoScan 4400F to use MemoryBMP.
+See Microsoft's [format/medium example](https://learn.microsoft.com/en-us/windows-hardware/drivers/image/adding-image-format-support)
+and [legacy-driver transfer documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/image/data-transfer-between-windows-vista-application-and-legacy-driver).
+
+WIA 2.0 download HRESULTs are preserved: cancellation returns `false`, and driver
+errors such as `E_INVALIDARG` become `WiaException` with the original error code.
+This allows callers to handle the error or retry through WIA 1.0. It does not
+repair a failure inside the Windows/driver WIA 2.0 compatibility path.
+
+Run the Windows COM regression checks with:
+
+```sh
+dotnet run --project tests/TransferRegressionTests.csproj
+```
+
+For hardware verification, scan the same full-page color document at 300 dpi
+through WIA 1.0 and WIA 2.0. On the tested 4400F, WIA 1.0 succeeds with this fix;
+direct WIA 2.0 still returns `E_INVALIDARG`. NAPS2's default WIA version can then
+retry using WIA 1.0. Explicitly selecting WIA 2.0 disables that automatic fallback.
+
 ## Supported Platforms
 - .NET Framework 4.6.2+ (Windows)
 - .NET 6.0+ (Windows)

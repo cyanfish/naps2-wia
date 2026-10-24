@@ -171,7 +171,8 @@ internal interface IWiaDataTransfer
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 internal interface IWiaTransfer
 {
-    void Download(int lFlags, IWiaTransferCallback pIWiaTransferCallback);
+    [PreserveSig]
+    int Download(int lFlags, IWiaTransferCallback pIWiaTransferCallback);
     void Upload(int lFlags, IStream pSource, IWiaTransferCallback pIWiaTransferCallback);
     void Cancel();
     IEnumWIA_FORMAT_INFO EnumWIA_FORMAT_INFO();

@@ -415,34 +415,62 @@ internal static class NativeWiaMethods
     public static uint StartTransfer1(IntPtr itemPtr, out IntPtr transfer)
     {
         var item = (IWiaItem) ToObjectNonNull(itemPtr);
-        const uint WIA_IPA_FIRST = 4098;
-        const uint WIA_IPA_FORMAT = 4106;
-        const uint WIA_IPA_TYMED = 4108;
-
-        const int TYMED_CALLBACK = 128;
-
-        var WiaImgFmt_BMP = new Guid(0xb96b3cab, 0x0728, 0x11d3, 0x9d, 0x7b, 0x00, 0x00, 0xf8, 0x1e, 0xf3, 0x2e);
-
         try
         {
-            var propSpec = new PROPSPEC[2]
-            {
-                new PROPSPEC { ulKind = 1, unionmember = new IntPtr(WIA_IPA_FORMAT) },
-                new PROPSPEC { ulKind = 1, unionmember = new IntPtr(WIA_IPA_TYMED) },
-            };
-            var propVariant = new PROPVARIANT[2];
-            propVariant[0].Init(WiaImgFmt_BMP);
-            propVariant[1].Init(TYMED_CALLBACK);
-
-            var propStorage = (IWiaPropertyStorage) item;
-            propStorage.WriteMultiple(2, propSpec, propVariant, WIA_IPA_FIRST);
+            ConfigureTransfer1((IWiaPropertyStorage) item);
             transfer = ToPtr((IWiaDataTransfer) item);
             return Hresult.S_OK;
         }
-        catch (COMException ex)
+        catch (Exception ex) when (ex is COMException ||
+                                   ex is ArgumentException && (uint) ex.HResult == Hresult.E_INVALIDARG)
         {
             transfer = IntPtr.Zero;
             return (uint) ex.HResult;
+        }
+    }
+
+    internal static void ConfigureTransfer1(IWiaPropertyStorage propStorage)
+    {
+        const uint WIA_IPA_FIRST = 4098;
+        const uint WIA_IPA_FORMAT = 4106;
+        const uint WIA_IPA_TYMED = 4108;
+        const int TYMED_CALLBACK = 128;
+
+        // Prefer the DIB format expected by the banded callback, but retain the
+        // previous BMP configuration for drivers that reject MemoryBMP.
+        var formats = new[]
+        {
+            new Guid(0xb96b3caa, 0x0728, 0x11d3, 0x9d, 0x7b, 0x00, 0x00, 0xf8, 0x1e, 0xf3, 0x2e), // MemoryBMP
+            new Guid(0xb96b3cab, 0x0728, 0x11d3, 0x9d, 0x7b, 0x00, 0x00, 0xf8, 0x1e, 0xf3, 0x2e), // BMP
+        };
+        var propSpec = new PROPSPEC[2]
+        {
+            new PROPSPEC { ulKind = 1, unionmember = new IntPtr(WIA_IPA_FORMAT) },
+            new PROPSPEC { ulKind = 1, unionmember = new IntPtr(WIA_IPA_TYMED) },
+        };
+        for (int i = 0; i < formats.Length; i++)
+        {
+            var propVariant = new PROPVARIANT[2];
+            try
+            {
+                propVariant[0].Init(formats[i]);
+                propVariant[1].Init(TYMED_CALLBACK);
+                propStorage.WriteMultiple(2, propSpec, propVariant, WIA_IPA_FIRST);
+                return;
+            }
+            catch (Exception ex) when (i == 0 && (ex is COMException ||
+                                      ex is ArgumentException && (uint) ex.HResult == Hresult.E_INVALIDARG))
+            {
+                // COM interop can map E_INVALIDARG to ArgumentException. Retry
+                // only during setup, before any scan data has been transferred.
+            }
+            finally
+            {
+                foreach (var value in propVariant)
+                {
+                    Win32.PropVariantClear(value);
+                }
+            }
         }
     }
 
@@ -483,8 +511,9 @@ internal static class NativeWiaMethods
         try
         {
             var callbackClass = new WiaTransferCallback2(func);
-            transfer.Download(0, callbackClass);
-            return Hresult.S_OK;
+            // Preserve the native HRESULT, including S_FALSE on cancellation and
+            // E_INVALIDARG, which COM interop otherwise maps to ArgumentException.
+            return (uint) transfer.Download(0, callbackClass);
         }
         catch (COMException ex)
         {

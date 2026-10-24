@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+  <!-- Compile the production sources to exercise internal COM boundaries without
+       adding a test framework dependency or exposing them in the public API. -->
+  <ItemGroup>
+    <Compile Include="../NAPS2.Wia/**/*.cs" Exclude="../NAPS2.Wia/obj/**;../NAPS2.Wia/bin/**" />
+    <Using Include="NAPS2.Wia.Native" />
+  </ItemGroup>
+</Project>
